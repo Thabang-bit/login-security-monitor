@@ -57,3 +57,13 @@ with open("report.txt", "w") as report:
     for ipaddress in suspicious_ips:
         print(ipaddress)
         report.write(ipaddress + "\n")
+        
+        total_failed_attempts = sum(failed_ips.values())
+
+        print("\n===== SECURITY SUMMARY =====")
+        print(f"Total failed login attempts: {total_failed_attempts}")
+        print(f"Suspicious IP addresses: {len(suspicious_ips)}")
+
+        report.write("\n===== SECURITY SUMMARY =====\n")
+        report.write(f"Total failed login attempts: {total_failed_attempts}\n")
+        report.write(f"Suspicious IP addresses: {len(suspicious_ips)}\n")        

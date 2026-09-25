@@ -11,3 +11,7 @@ WARNING: 192.168.1.50 may be under a brute-force attack!
 
 ===== SUSPICIOUS IP ADDRESSES =====
 192.168.1.50
+
+===== SECURITY SUMMARY =====
+Total failed login attempts: 5
+Suspicious IP addresses: 1
