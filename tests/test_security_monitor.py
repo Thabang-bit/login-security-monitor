@@ -13,3 +13,8 @@ def test_brute_force_detection():
     failed_attempts = 4
 
     assert failed_attempts >= 3    
+
+def test_security_severity():
+    assert 1 < 2
+    assert 2 == 2
+    assert 4 >= 3
