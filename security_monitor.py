@@ -14,31 +14,38 @@ total_logins = 0
 successful_logins = 0
 
 
-with open(args.log_file, "r") as file:
-    for line in file:
-        parts = line.strip().split()
+try:
+    with open(args.log_file, "r") as file:
+        for line in file:
+            parts = line.strip().split()
 
-        date = parts[0]
-        time = parts[1]
-        username = parts[2]
-        ipaddress = parts[3]
-        status = parts[4]
-        total_logins += 1
+            date = parts[0]
+            time = parts[1]
+            username = parts[2]
+            ipaddress = parts[3]
+            status = parts[4]
+            
+            total_logins += 1
 
-        if status == "SUCCESS":
-            successful_logins += 1
+            if status == "SUCCESS":
+                successful_logins += 1
 
-        if status == "FAILED":
-            if username not in failed_logins:
-                failed_logins[username] = 0
+            if status == "FAILED":
+                if username not in failed_logins:
+                    failed_logins[username] = 0
 
-            failed_logins[username] += 1
+                failed_logins[username] += 1
 
-            if ipaddress not in failed_ips:
-                failed_ips[ipaddress] = 0
+                if ipaddress not in failed_ips:
+                    failed_ips[ipaddress] = 0
 
-            failed_ips[ipaddress] += 1
-            failed_login_times.append(f"{date} {time} - {username} - {ipaddress}")
+                failed_ips[ipaddress] += 1
+                failed_login_times.append(f"{date} {time} - {username} - {ipaddress}")
+
+except FileNotFoundError:
+    print(f"Error: Log file '{args.log_file}' was not found.")
+    exit()
+
 
 print("===== SECURITY REPORT =====")
 
@@ -89,26 +96,26 @@ with open("report.txt", "w") as report:
         print(ipaddress)
         report.write(ipaddress + "\n")
 
-        total_failed_attempts = sum(failed_ips.values())
+    total_failed_attempts = sum(failed_ips.values())
 
-        print("\n===== SECURITY SUMMARY =====")
-        print(f"Total failed login attempts: {total_failed_attempts}")
-        print(f"Successful logins: {successful_logins}")
-        print(f"Failed login attempts: {total_failed_attempts}")
-        print(f"Suspicious IP addresses: {len(suspicious_ips)}")
+    print("\n===== SECURITY SUMMARY =====")
+    print(f"Total failed login attempts: {total_failed_attempts}")
+    print(f"Successful logins: {successful_logins}")
+    print(f"Failed login attempts: {total_failed_attempts}")
+    print(f"Suspicious IP addresses: {len(suspicious_ips)}")
 
-        report.write("\n===== SECURITY SUMMARY =====\n")
-        report.write(f"Total failed login attempts: {total_failed_attempts}\n")
-        report.write(f"Successful logins: {successful_logins}\n")
-        report.write(f"Failed login attempts: {total_failed_attempts}\n")
-        report.write(f"Suspicious IP addresses: {len(suspicious_ips)}\n")
+    report.write("\n===== SECURITY SUMMARY =====\n")
+    report.write(f"Total failed login attempts: {total_failed_attempts}\n")
+    report.write(f"Successful logins: {successful_logins}\n")
+    report.write(f"Failed login attempts: {total_failed_attempts}\n")
+    report.write(f"Suspicious IP addresses: {len(suspicious_ips)}\n")
 
-        print("\n===== FAILED LOGIN TIMES =====")
-        report.write("\n===== FAILED LOGIN TIMES =====\n")
+    print("\n===== FAILED LOGIN TIMES =====")
+    report.write("\n===== FAILED LOGIN TIMES =====\n")
 
-        for login in failed_login_times:
-            print(login)
-            report.write(login + "\n")        
+    for login in failed_login_times:
+        print(login)
+        report.write(login + "\n")        
 
 with open("security_report.csv", "w", newline="") as csv_file:
     writer = csv.writer(csv_file)
