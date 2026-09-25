@@ -19,6 +19,10 @@ try:
         for line in file:
             parts = line.strip().split()
 
+            if len(parts) != 5:
+                print("Warning: Invalid log entry skipped.")
+                continue
+
             date = parts[0]
             time = parts[1]
             username = parts[2]
