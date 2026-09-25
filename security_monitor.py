@@ -29,6 +29,10 @@ try:
             ipaddress = parts[3]
             status = parts[4]
             
+            if status not in ["SUCCESS", "FAILED"]:
+                print("Warning: Invalid login status skipped.")
+                continue
+            
             total_logins += 1
 
             if status == "SUCCESS":
