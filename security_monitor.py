@@ -55,10 +55,24 @@ with open("report.txt", "w") as report:
         report.write(message + "\n")
 
         if attempts >= 3:
+            severity = "HIGH"
             warning = f"WARNING: {ipaddress} may be under a brute-force attack!"
             print(warning)
+            print(f"Severity: {severity}")
             report.write(warning + "\n")
+            report.write(f"Severity: {severity}\n")
             suspicious_ips.append(ipaddress)
+
+        elif attempts == 2:
+            severity = "MEDIUM"
+            print(f"Severity: {severity}")
+            report.write(f"Severity: {severity}\n")
+
+        else:
+            severity = "LOW"
+            print(f"Severity: {severity}")
+            report.write(f"Severity: {severity}\n")    
+
     print("\n===== SUSPICIOUS IP ADDRESSES =====")
     report.write("\n===== SUSPICIOUS IP ADDRESSES =====\n")
 

@@ -2,18 +2,20 @@
 
 Mike: 4 failed login attempts
 WARNING: Mike may be under a brute-force attack!
-Sarah: 1 failed login attempts
+Sarah: 2 failed login attempts
 
 ===== IP ADDRESS REPORT =====
 192.168.1.50: 4 failed login attempts
 WARNING: 192.168.1.50 may be under a brute-force attack!
-192.168.1.20: 1 failed login attempts
+Severity: HIGH
+192.168.1.20: 2 failed login attempts
+Severity: MEDIUM
 
 ===== SUSPICIOUS IP ADDRESSES =====
 192.168.1.50
 
 ===== SECURITY SUMMARY =====
-Total failed login attempts: 5
+Total failed login attempts: 6
 Successful logins: 2
-Failed login attempts: 5
+Failed login attempts: 6
 Suspicious IP addresses: 1
