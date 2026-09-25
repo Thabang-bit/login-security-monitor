@@ -14,4 +14,6 @@ WARNING: 192.168.1.50 may be under a brute-force attack!
 
 ===== SECURITY SUMMARY =====
 Total failed login attempts: 5
+Successful logins: 2
+Failed login attempts: 5
 Suspicious IP addresses: 1

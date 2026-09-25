@@ -2,6 +2,10 @@ failed_logins = {}
 failed_ips = {}
 suspicious_ips = []
 
+total_logins = 0
+successful_logins = 0
+
+
 with open("logs.txt", "r") as file:
     for line in file:
         parts = line.strip().split()
@@ -11,6 +15,10 @@ with open("logs.txt", "r") as file:
         username = parts[2]
         ipaddress = parts[3]
         status = parts[4]
+        total_logins += 1
+
+        if status == "SUCCESS":
+            successful_logins += 1
 
         if status == "FAILED":
             if username not in failed_logins:
@@ -57,13 +65,17 @@ with open("report.txt", "w") as report:
     for ipaddress in suspicious_ips:
         print(ipaddress)
         report.write(ipaddress + "\n")
-        
+
         total_failed_attempts = sum(failed_ips.values())
 
         print("\n===== SECURITY SUMMARY =====")
         print(f"Total failed login attempts: {total_failed_attempts}")
+        print(f"Successful logins: {successful_logins}")
+        print(f"Failed login attempts: {total_failed_attempts}")
         print(f"Suspicious IP addresses: {len(suspicious_ips)}")
 
         report.write("\n===== SECURITY SUMMARY =====\n")
         report.write(f"Total failed login attempts: {total_failed_attempts}\n")
+        report.write(f"Successful logins: {successful_logins}\n")
+        report.write(f"Failed login attempts: {total_failed_attempts}\n")
         report.write(f"Suspicious IP addresses: {len(suspicious_ips)}\n")        
