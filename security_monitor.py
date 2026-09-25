@@ -2,7 +2,7 @@ import csv
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--log-file", default="logs.txt")
+parser.add_argument("--log-file", default="logs.txt", help="Path to the login log file")
 args = parser.parse_args()
 
 failed_logins = {}
@@ -14,7 +14,7 @@ total_logins = 0
 successful_logins = 0
 
 
-with open("logs.txt", "r") as file:
+with open(args.log_file, "r") as file:
     for line in file:
         parts = line.strip().split()
 
