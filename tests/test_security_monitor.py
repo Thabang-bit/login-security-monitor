@@ -14,7 +14,16 @@ def test_brute_force_detection():
 
     assert failed_attempts >= 3    
 
+def get_severity(attempts):
+    if attempts >= 3:
+        return "HIGH"
+    elif attempts == 2:
+        return "MEDIUM"
+    else:
+        return "LOW"
+
+
 def test_security_severity():
-    assert 1 < 2
-    assert 2 == 2
-    assert 4 >= 3
+    assert get_severity(1) == "LOW"
+    assert get_severity(2) == "MEDIUM"
+    assert get_severity(4) == "HIGH"
