@@ -19,3 +19,11 @@ Total failed login attempts: 6
 Successful logins: 2
 Failed login attempts: 6
 Suspicious IP addresses: 1
+
+===== FAILED LOGIN TIMES =====
+2026-09-25 08:12 - Mike - 192.168.1.50
+2026-09-25 08:13 - Mike - 192.168.1.50
+2026-09-25 08:14 - Mike - 192.168.1.50
+2026-09-25 08:15 - Mike - 192.168.1.50
+2026-09-25 08:22 - Sarah - 192.168.1.20
+2026-09-25 08:25 - Sarah - 192.168.1.20

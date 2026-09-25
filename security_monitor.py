@@ -1,6 +1,7 @@
 failed_logins = {}
 failed_ips = {}
 suspicious_ips = []
+failed_login_times = []
 
 total_logins = 0
 successful_logins = 0
@@ -30,6 +31,7 @@ with open("logs.txt", "r") as file:
                 failed_ips[ipaddress] = 0
 
             failed_ips[ipaddress] += 1
+            failed_login_times.append(f"{date} {time} - {username} - {ipaddress}")
 
 print("===== SECURITY REPORT =====")
 
@@ -92,4 +94,11 @@ with open("report.txt", "w") as report:
         report.write(f"Total failed login attempts: {total_failed_attempts}\n")
         report.write(f"Successful logins: {successful_logins}\n")
         report.write(f"Failed login attempts: {total_failed_attempts}\n")
-        report.write(f"Suspicious IP addresses: {len(suspicious_ips)}\n")        
+        report.write(f"Suspicious IP addresses: {len(suspicious_ips)}\n")
+
+        print("\n===== FAILED LOGIN TIMES =====")
+        report.write("\n===== FAILED LOGIN TIMES =====\n")
+
+        for login in failed_login_times:
+            print(login)
+            report.write(login + "\n")        
