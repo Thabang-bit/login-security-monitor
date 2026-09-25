@@ -1,3 +1,5 @@
+import csv
+
 failed_logins = {}
 failed_ips = {}
 suspicious_ips = []
@@ -102,3 +104,18 @@ with open("report.txt", "w") as report:
         for login in failed_login_times:
             print(login)
             report.write(login + "\n")        
+
+with open("security_report.csv", "w", newline="") as csv_file:
+    writer = csv.writer(csv_file)
+
+    writer.writerow(["IP Address", "Failed Attempts", "Severity"])
+
+    for ipaddress, attempts in failed_ips.items():
+        if attempts >= 3:
+            severity = "HIGH"
+        elif attempts == 2:
+            severity = "MEDIUM"
+        else:
+            severity = "LOW"
+
+        writer.writerow([ipaddress, attempts, severity])
