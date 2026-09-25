@@ -1,4 +1,9 @@
 import csv
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--log-file", default="logs.txt")
+args = parser.parse_args()
 
 failed_logins = {}
 failed_ips = {}
