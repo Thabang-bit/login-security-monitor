@@ -3,3 +3,8 @@
 Mike: 4 failed login attempts
 WARNING: Mike may be under a brute-force attack!
 Sarah: 1 failed login attempts
+
+===== IP ADDRESS REPORT =====
+192.168.1.50: 4 failed login attempts
+WARNING: 192.168.1.50 may be under a brute-force attack!
+192.168.1.20: 1 failed login attempts

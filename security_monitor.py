@@ -1,4 +1,5 @@
 failed_logins = {}
+failed_ips = {}
 
 with open("logs.txt", "r") as file:
     for line in file:
@@ -16,6 +17,11 @@ with open("logs.txt", "r") as file:
 
             failed_logins[username] += 1
 
+            if ipaddress not in failed_ips:
+                failed_ips[ipaddress] = 0
+
+            failed_ips[ipaddress] += 1
+
 print("===== SECURITY REPORT =====")
 
 with open("report.txt", "w") as report:
@@ -28,5 +34,18 @@ with open("report.txt", "w") as report:
 
         if attempts >= 3:
             warning = f"WARNING: {username} may be under a brute-force attack!"
+            print(warning)
+            report.write(warning + "\n")
+
+    print("\n===== IP ADDRESS REPORT =====")
+    report.write("\n===== IP ADDRESS REPORT =====\n")
+
+    for ipaddress, attempts in failed_ips.items():
+        message = f"{ipaddress}: {attempts} failed login attempts"
+        print(message)
+        report.write(message + "\n")
+
+        if attempts >= 3:
+            warning = f"WARNING: {ipaddress} may be under a brute-force attack!"
             print(warning)
             report.write(warning + "\n")
