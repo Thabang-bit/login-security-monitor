@@ -1,5 +1,6 @@
 failed_logins = {}
 failed_ips = {}
+suspicious_ips = []
 
 with open("logs.txt", "r") as file:
     for line in file:
@@ -49,3 +50,10 @@ with open("report.txt", "w") as report:
             warning = f"WARNING: {ipaddress} may be under a brute-force attack!"
             print(warning)
             report.write(warning + "\n")
+            suspicious_ips.append(ipaddress)
+    print("\n===== SUSPICIOUS IP ADDRESSES =====")
+    report.write("\n===== SUSPICIOUS IP ADDRESSES =====\n")
+
+    for ipaddress in suspicious_ips:
+        print(ipaddress)
+        report.write(ipaddress + "\n")
