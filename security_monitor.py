@@ -7,7 +7,8 @@ with open("logs.txt", "r") as file:
         date = parts[0]
         time = parts[1]
         username = parts[2]
-        status = parts[3]
+        ipaddress = parts[3]
+        status = parts[4]
 
         if status == "FAILED":
             if username not in failed_logins:
